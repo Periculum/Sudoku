@@ -28,7 +28,7 @@ public class Sudoku4x4 {
 	}
 	
 	public void generateSudoku(){
-		//diagonal();
+		//diagonal(); funktioniert, erzeugt aber einen fehler wenn später alles generiert werden soll
 		fill();
 		//delete();
 	}
