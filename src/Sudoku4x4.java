@@ -11,13 +11,16 @@ public class Sudoku4x4 {
 	
 	private Random rnd = new Random();
 	
+	private int constant = 4;
+	
 	public Sudoku4x4(){
-		//this.S4x4 = S;
+		//this.S4x4 = S; 
+		//Konstruktor f√ºr sp√§tere Ausgabe
 	}
 	
 	public void printSudoku4x4(){
-		for(int r = 0; r < 4; r++){
-			for(int c = 0; c < 4; c++){
+		for(int r = 0; r < constant; r++){
+			for(int c = 0; c < constant; c++){
 				System.out.print(S4x4[r][c] + " ");
 			}
 			System.out.println();
@@ -32,15 +35,15 @@ public class Sudoku4x4 {
 	
 	//um abfragen zu sparen, werden zuerst die diagonalen Boxen gef√ºllt
 	private void diagonal(){
-		fillbox(0,0); //f¸lle obere linke Ecke
-		fillbox(2,2); //f¸lle untere rechte Ecke
+		fillbox(0,0); //f√ºlle obere linke Ecke
+		fillbox(2,2); //f√ºlle untere rechte Ecke
 	}
 	
-	//restliche Boxen werden gef¸llt, nach allen drei Spielregeln
+	//restliche Boxen werden gef√ºllt, nach allen drei Spielregeln
 	private void fill(){
 		int number;
-		for(int r = 0; r < 4; r++){
-			for(int c = 0; c < 4; c++){	
+		for(int r = 0; r < constant; r++){
+			for(int c = 0; c < constant; c++){	
 				if(S4x4[r][c] == 0){	
 					do{
 						number = randomNumber();
@@ -53,11 +56,11 @@ public class Sudoku4x4 {
 		}
 	}
 	
-	//f¸llt eine Box nach den Spielregeln, 2x2
+	//f√ºllt eine Box nach den Spielregeln, 2x2
 	private void fillbox(int rStart, int cStart) {
 		int number;
-		for(int r = 0; r < 2; r++){
-			for(int c = 0; c < 2; c++){
+		for(int r = 0; r < constant; r++){
+			for(int c = 0; c < constant; c++){
 				
 				do{
 					number = randomNumber();
@@ -69,19 +72,19 @@ public class Sudoku4x4 {
 		}	
 	}
 	
-	//setzt wert auf oben links in der aktuellen Box zur¸ck
+	//setzt wert auf oben links in der aktuellen Box zur√ºck
 	private int adjustForCheckBox(int v) {
-		return v - (v % (int)Math.sqrt(4));
+		return v - (v % (int)Math.sqrt(constant));
 	}
 	
-	//pr¸ft ob generierte Zahl nach den Spielregeln konform ist
+	//pr√ºft ob generierte Zahl nach den Spielregeln konform ist
 	private boolean isValid(int r, int c, int testNumber){
 		return checkrow(r,testNumber) && checkcoloumn(c,testNumber) && checkBox(adjustForCheckBox(r), adjustForCheckBox(c), testNumber);
 	}
 	
-	//pr¸ft Reihen Regel
+	//pr√ºft Reihen Regel
 	private boolean checkrow(int r, int testNumber) {
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < constant; i++){
 			if(S4x4[r][i] == testNumber){
 				return false;
 			}
@@ -89,9 +92,9 @@ public class Sudoku4x4 {
 		return true;
 	}
 	
-	//pr¸ft Spalten Regel
+	//pr√ºft Spalten Regel
 	private boolean checkcoloumn(int c, int testNumber) {
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < constant; i++){
 			if(S4x4[i][c] == testNumber){
 				return false;
 			}
@@ -99,10 +102,10 @@ public class Sudoku4x4 {
 		return true;
 	}
 	
-	//pr¸ft Box Regel
+	//pr√ºft Box Regel
 	private boolean checkBox(int rStart, int cStart, int testNumber){
-		for(int r = 0; r < 2; r++){
-			for(int c = 0; c < 2; c++){
+		for(int r = 0; r < (int) Math.sqrt(constant); r++){
+			for(int c = 0; c < (int) Math.sqrt(constant); c++){
 				if(S4x4[rStart + r][cStart + c] == testNumber){
 					return false;
 				}
@@ -112,7 +115,7 @@ public class Sudoku4x4 {
 	}
 	
 	private int randomNumber(){
-		return(rnd.nextInt(4) + 1);
+		return(rnd.nextInt(constant) + 1);
 	}
 	
 }
