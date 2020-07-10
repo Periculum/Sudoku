@@ -29,7 +29,7 @@ public class Sudoku4x4 {
 	}
 	
 	public void generateSudoku(){
-		//diagonal(); funktioniert, erzeugt aber einen fehler wenn später alles generiert werden soll
+		//diagonal(); //funktioniert, erzeugt aber einen fehler wenn später alle Felder generiert worden sind
 		fill();
 		delete();
 	}
@@ -37,15 +37,15 @@ public class Sudoku4x4 {
 	//elemente löschen um Sudoku zu finalisieren
 	private void delete(){
 		int r, c;
-		int count = 0;
-		
-		do{			
+		int count = 0;	
+					
+		while(count < deleteNumber){
 			r = randomNumber() -1;
 			c = randomNumber() -1;
-			
-		}while(count < deleteNumber);{
-			S4x4[r][c] = 0;
-			count++;
+			if(S4x4[r][c] != 0){
+				S4x4[r][c] = 0;
+				count++;
+			}
 		}
 		
 	}
